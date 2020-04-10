@@ -16,6 +16,7 @@ class CreateProject extends Component {
     e.preventDefault();
     this.props.createProject(this.state)
   }
+
   render() {
     return (
       <div className="container">
