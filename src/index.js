@@ -11,9 +11,9 @@ import firebase from 'firebase/app'
 import 'firebase/auth'
 import 'firebase/firestore'
 //import 'firebase/functions' // <- needed if using httpsCallable
-import { createStore, applyMiddleware } from 'redux'
+import { createStore, applyMiddleware, compose } from 'redux'
 import { ReactReduxFirebaseProvider, getFirebase } from 'react-redux-firebase'
-import { createFirestoreInstance, getFirestore } from 'redux-firestore'
+import { createFirestoreInstance, getFirestore, reduxFirestore } from 'redux-firestore'
 
 
 // react-redux-firebase config
@@ -25,7 +25,12 @@ const rrfConfig = {
 firebase.initializeApp(fbConfig)
 firebase.firestore()
 
-const store = createStore(rootReducer, applyMiddleware(thunk.withExtraArgument({getFirebase, getFirestore})),)
+const store = createStore(rootReducer,
+  compose(
+    applyMiddleware(thunk.withExtraArgument({getFirebase, getFirestore})),
+    reduxFirestore(fbConfig) // redux bindings for firestore
+  )
+);
 
 const rrfProps = {
   firebase,
