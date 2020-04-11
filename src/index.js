@@ -15,8 +15,6 @@ import 'firebase/database'
 import { createStore, applyMiddleware, compose } from 'redux'
 import { ReactReduxFirebaseProvider, getFirebase } from 'react-redux-firebase'
 import { createFirestoreInstance, reduxFirestore } from 'redux-firestore'
-import { useFirestore } from 'react-redux-firebase'
-
 
 // react-redux-firebase config
 const rrfConfig = {
